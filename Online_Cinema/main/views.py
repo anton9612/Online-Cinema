@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from .data import movies, genres
 
-# Create your views here.
+def index(request):
+    context={
+        'movies':movies,
+        'genres':genres,
+    }
+    return render(request,'main/index.html',context)
