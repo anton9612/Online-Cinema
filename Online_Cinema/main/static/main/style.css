@@ -1,0 +1,20 @@
+.movies{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.movie_card{
+    box-shadow: 0 2px 8px rgba(110, 15, 15, 0.363);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.movie_card img {
+    width: 100%;
+    height:200px;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 10%;
+}
