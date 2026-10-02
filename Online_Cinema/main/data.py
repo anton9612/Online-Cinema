@@ -75,7 +75,8 @@ translations={
         'theme':'Тема',
         'lang':'Язык',
         'save':'Сохранить',
-        "help_for_genres":'Желаете выбрать жанр самостоятельно?'
+        "help_for_genres":'Желаете выбрать жанр самостоятельно?',
+                "all_genres":"Все жанры"
     },
     'en':{
         'title':'Online Cinema',
@@ -85,6 +86,7 @@ translations={
         'theme':'Theme',
         'lang':'Language',
         'save':'Ok',
-        "help_for_genres":'Would you like to choose a genre yourself?'
+        "help_for_genres":'Would you like to choose a genre yourself?',
+        "all_genres":"All"
     }
 }
