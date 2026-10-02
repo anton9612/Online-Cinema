@@ -4,28 +4,38 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>Онлайн-кинотеатр</title>
+        <title>{{transl.title}}</title>
         <link rel="stylesheet" href="{% static 'main/style.css' %}">
 
     </head>
-    <body>
-        <p>Настройки</p>
+    <body class="{{theme}}">
+        <p>{{transl.settings}}</p>
         <form method="post">
             {% csrf_token %}
-            <label for="lang">Язык</label>
+            <label for="lang">{{transl.lang}}</label>
             <select name="lang" id="lang">
-                <option value="ru">Русский</option>
-                <option value="en">English</option>
+                <option value="ru" {% if lang == 'ru'%}selected{% endif %}>Русский</option>
+                <option value="en" {% if lang == 'en'%}selected{% endif %}>English</option>
             </select>
-            <label for="theme">Тема:</label>
-            <select name="lang" id="lang">
-                <option value="light">Светлая</option>
-                <option value="dark">Темная</option>
+            <label for="theme">{{transl.theme}}:</label>
+            <select name="theme" id="theme">
+                <option value="light" {% if theme == 'light' %}selected{% endif %}>Светлая</option>
+                <option value="dark" {% if theme == 'dark' %}selected{%endif%}>Темная</option>
             </select>
-
+            <button type="submit">{{transl.save}}</button>
         </form>
-        <h1>Кинотеатр</h1>
-        <h2>Жанры</h2>
+        <p>{{transl.help_for_genres}}</p>
+        <form method="post">
+            {% csrf_token %}
+            <select name="genre" id="genre">
+                {% for genre in genres %}
+                <option value="{{genre}}">{{genre}}</option>
+                {% endfor%}
+            </select>
+            <button type="submit">Ок</button>
+        </form>
+        <h1>{{transl.title}}</h1>
+        <h2>{{transl.genres}}</h2>
 
         <ul>
 
@@ -36,14 +46,14 @@
         </ul>
 
 
-        <h2>Фильмы</h2>
+        <h2>{{transl.movies}}</h2>
         <div class="movies">
             {% for movie in movies %}
                 <div class="movie_card">
                 <img src="{% static 'main/image/' %}{{movie.poster}}" alt="{{movie.title}}">
                 <h2>{{movie.title}} </h2>
                 <h3>{{movie.genre}}</h3>
-                {{movie.description}}
+                <p>{{movie.description}}</p>
                 </div>
             {% endfor %}
         </div>

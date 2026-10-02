@@ -9,7 +9,19 @@
     padding: 12px;
     border-radius: 10px;
 }
+body.light{
+    background-color: azure;
+}
+body.dark{
+    background-color: black;    
+}
+body.dark .movie_card{
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.363);
+}
 
+body.dark h1, body.dark h2, body.dark h3, body.dark p, body.dark li, body.dark label{
+    color:azure
+} 
 .movie_card img {
     width: 100%;
     height:200px;
