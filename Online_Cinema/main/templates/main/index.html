@@ -24,37 +24,47 @@
             </select>
             <button type="submit">{{transl.save}}</button>
         </form>
+
+        <h1>{{transl.title}}</h1>
+        <h2>{{transl.genres}}</h2>
+
         <p>{{transl.help_for_genres}}</p>
         <form method="post">
             {% csrf_token %}
             <select name="genre" id="genre">
-                <option value="all" {%if sort_genre == 'all'%}selected{%endif%}>{{transl.all_genres}}</option>
+                <option value="0" {%if '0' in sort_genre %}selected{%endif%}>{{transl.all_genres}}</option>
                 {% for genre in genres %}
-                <option value="{{genre}}" {%if sort_genre == genre%}selected{%endif%}>{{genre}}</option>
+                <option value="{{genre.id}}" {%if genre.id|stringformat:"s" in sort_genre %}selected{%endif%}>{{genre.name}}</option>
                 {% endfor%}
             </select>
             <button type="submit">{{transl.save}}</button>
         </form>
-        <h1>{{transl.title}}</h1>
-        <h2>{{transl.genres}}</h2>
+        <p>{{transl.help_for_genres_2}}</p>
+        <form method="post">
+            {% csrf_token %}
 
-        <ul>
+            {%for genre in genres%}
+            {%if genre.name != "All" %}
+            <label><input type="checkbox" value={{genre.id}} name="multiply_genres" {%if genre.id|stringformat:"s" in sort_genre%}checked{%endif%}>{{genre.name}}</label>
+            {%endif%}
+            {%endfor%}
+            <button type="submit">{{transl.save}}</button>
 
-                {% for genre in genres %}
-                <li>{{genre}}</li>
-                {% endfor %}
-
-        </ul>
+        </form>
 
 
         <h2>{{transl.movies}}</h2>
         <div class="movies">
             {% for movie in movies %}
-                {%if sort_genre == 'all' or sort_genre == movie.genre%}
+                {%if '0' in sort_genre or movie.genre|stringformat:"s" in sort_genre%}
                 <div class="movie_card">
                 <img src="{% static 'main/image/' %}{{movie.poster}}" alt="{{movie.title}}">
                 <h2>{{movie.title}} </h2>
-                <h3>{{movie.genre}}</h3>
+                <h3>
+                    {% for g in genres %}
+                        {% if g.id|stringformat:"s" == movie.genre %}{{ g.name }}{% endif %}
+                    {% endfor %}
+                </h3>
                 <p>{{movie.description}}</p>
                 </div>
                 {%endif%}
